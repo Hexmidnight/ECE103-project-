@@ -40,9 +40,22 @@ def set_image_opacity(opacity_level):
 
 
 def fading():
-    for opacity in [25, 50, 75, 100, 125, 150, 175, 255]:
-        set_image_opacity(opacity)
-        time.sleep(0.2)
+    set_image_opacity(25)
+    time.sleep(0.2)
+    set_image_opacity(50)
+    time.sleep(0.2)
+    set_image_opacity(75)
+    time.sleep(0.2)
+    set_image_opacity(100)
+    time.sleep(0.2)
+    set_image_opacity(125)
+    time.sleep(0.2)
+    set_image_opacity(150)
+    time.sleep(0.2)
+    set_image_opacity(175)
+    time.sleep(0.2)
+    set_image_opacity(255)
+    time.sleep(0.2)
 
 
 # ------------------------
