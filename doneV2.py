@@ -67,23 +67,14 @@ def fading():
 # ------------------------
 
 class Photo:
-    def __init__(self):
-        self.i = 0
-
-    def capture_photos(self):
-        try:
-            while self.i != 10:
-                filename = f"{self.i}pic.jpg"
-
-                subprocess.run(
-                    f"fswebcam -d /dev/video0 -r 1280x720 -S0 {filename}",
-                    shell=True
-                )
-
-                print("Pic Captured:", filename)
-
-                self.i += 1
-                time.sleep(0.2)
+   try:
+    while i != 10:
+        subprocess.call("fswebcam -d /dev/video0 -r 1280x720 -S0 " + str(i) + "pic.jpg", shell=True)
+        print('Pic Captured')
+        
+        i+=1
+        
+        time.sleep(0.2)
 
         except KeyboardInterrupt:
             print("lol")
