@@ -56,7 +56,7 @@ def wait_for_beam_break():
     # Wait until beam goes low (broken)
     print("Waiting for beam break to take photo...")
     while GPIO.input(BEAM_PIN):  # HIGH = unbroken
-        # Placeholder
+        time.sleep(0.01)
     print("Beam broken → editing photo")
 
 """
