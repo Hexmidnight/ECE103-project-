@@ -1,0 +1,4 @@
+Reminder:
+
+2 & 6 for the Transmitter
+4 & 9 & 11 for the Receiver
