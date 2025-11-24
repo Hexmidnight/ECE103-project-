@@ -1,3 +1,4 @@
+import cv2 
 import subprocess
 import time
 from PIL import Image, ImageEnhance
@@ -61,11 +62,9 @@ def take_picture():
     print("Pic Captured:", images_path)
 
 
+cv2.namedWindow("Fade Preview", cv2.WINDOW_NORMAL)
+
 def fade_to_black(level, index):
-    """
-    level: brightness (1.0 -> 0.0)
-    index: fade step number
-    """
     img = Image.open(images_path).convert("RGB")
     enhancer = ImageEnhance.Brightness(img)
     darker = enhancer.enhance(level)
@@ -74,12 +73,10 @@ def fade_to_black(level, index):
     fade_path = os.path.join(output_images_tosubpath, fade_filename)
     darker.save(fade_path)
 
-    try:
-        preview = Image.open(fade_path)
-        preview.show()              # <<---- restored so you SEE each fade frame
-        time.sleep(0.3)             # give image viewer time to open
-    except FileNotFoundError:
-        print("Preview image not found.")
+    # Display with OpenCV
+    cv_img = cv2.imread(fade_path)
+    cv2.imshow("Fade Preview", cv_img)
+    cv2.waitKey(1)
 
     print(f"Saved brightness level {level} -> {fade_path}")
 
@@ -111,3 +108,5 @@ try:
 finally:
     GPIO.cleanup()
     print("GPIO cleaned up.")
+
+cv2.destroyAllWindows()
