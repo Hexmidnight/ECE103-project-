@@ -62,7 +62,8 @@ def take_picture():
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
     # Capture Time
-    time.sleep(0.5)
+    # time.sleep(0.5)
+    time.sleep(2)
 
     ret, frame = cap.read()
     cap.release()
@@ -83,13 +84,13 @@ _______________________
 """
 
 cv2.namedWindow("Fade Preview", cv2.WINDOW_NORMAL)
-
 cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 def fade_to_black_cv(img, level):
     # Multiply image brightness by level
-    faded = (img.astype(np.float32) * level).astype(np.uint8)
-
+    # faded = (img.astype(np.float32) * level).astype(np.uint8)
+    faded = img * level
+    
     # Show instantly without blocking
     cv2.imshow("Fade Preview", faded)
     cv2.waitKey(1)
