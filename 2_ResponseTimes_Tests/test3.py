@@ -21,10 +21,6 @@ os.makedirs(images_tosubpath, exist_ok=True)
 """
 BREAK BEAM SETUP
 _______________________________________________________
-
-This keeps OpenCV responsive by avoiding wait_for_edge(),
-which freezes the GUI. We poll instead.
-
 """
 
 BEAM_PIN = 17
@@ -56,14 +52,14 @@ _______________________________________________
 
 def take_picture():
     cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
- 
-    cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1080)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1920)
 
-    # Capture Time
-    # time.sleep(0.5)
-    time.sleep(5)
+    # Not inverted for now
+    cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+
+    # Capture time is three seconds
+    time.sleep(3)
 
     ret, frame = cap.read()
     cap.release()
@@ -83,15 +79,12 @@ FADE IN RAM
 _______________________
 """
 
-cv2.namedWindow("Fade Preview", cv2.WINDOW_NORMAL)
-cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+# cv2.namedWindow("Fade Preview", cv2.WINDOW_NORMAL)
+# cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 def fade_to_black_cv(img, level):
     
     faded = cv2.convertScaleAbs(img, alpha=level, beta=0)
-
-    # Alt: Multiply image brightness by level
-    #faded = (img.astype(np.float32) * level).astype(np.uint8)
     
     cv2.imshow("Fade Preview", faded)
     cv2.waitKey(1)
@@ -99,11 +92,18 @@ def fade_to_black_cv(img, level):
 
 def increment_fade(img):
     fade_steps = [1.0, 0.7, 0.4, 0.2, 0.0]
+    fade_steps = [0.7, 0.4, 0.2, 0.0]
+    
+    # cv2.namedWindow("Fade Preview", img) for first preview
+    # cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
 
     for level in fade_steps:
         wait_for_beam_break_nonblocking()
         print("Applying fade level:", level)
         fade_to_black_cv(img, level)
+    
+    # time.sleep(10) attempt to hold last image 
 
 
 """
@@ -111,6 +111,7 @@ PROGRAM START
 ___________________________
 
 """
+
 
 try:
     userInput = input("Please click Enter: ")
@@ -129,3 +130,5 @@ finally:
     GPIO.cleanup()
     print("GPIO cleaned up.")
     cv2.destroyAllWindows()
+
+    # Needs to loop
