@@ -63,7 +63,7 @@ def take_picture():
 
     # Capture Time
     # time.sleep(0.5)
-    time.sleep(2)
+    time.sleep(5)
 
     ret, frame = cap.read()
     cap.release()
@@ -83,15 +83,16 @@ FADE IN RAM
 _______________________
 """
 
-cv2.namedWindow("Fade Preview", cv2.WINDOW_NORMAL)
+# cv2.namedWindow("Fade Preview", cv2.WINDOW_NORMAL)
 cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 def fade_to_black_cv(img, level):
-    # Multiply image brightness by level
-    # faded = (img.astype(np.float32) * level).astype(np.uint8)
-    faded = level
     
-    # Show instantly without blocking
+    faded = cv2.convertScaleABS(img, alpha=level, beta=0)
+
+    # Alt: Multiply image brightness by level
+    #faded = (img.astype(np.float32) * level).astype(np.uint8)
+    
     cv2.imshow("Fade Preview", faded)
     cv2.waitKey(1)
 
@@ -115,7 +116,7 @@ try:
     userInput = input("Please click Enter: ")
 
     if userInput == "":
-        img = take_picture()   # Capture only once
+        img = take_picture()   
 
         if img is not None:
             increment_fade(img)
