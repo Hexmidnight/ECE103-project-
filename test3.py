@@ -83,8 +83,9 @@ FADE IN RAM
 _______________________
 """
 
-cv2.namedWindow("Fade Preview", cv2.WINDOW_NORMAL)
-cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+# cv2.namedWindow("Fade Preview", cv2.WINDOW_NORMAL)
+cv2.namedWindow("Fade Preview, cv2.WND_PROP_FULLSCREEN", cv2.WINDOW_FULLSCREEN)
+# cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 def fade_to_black_cv(img, level):
     
