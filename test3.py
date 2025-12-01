@@ -89,7 +89,7 @@ cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSC
 def fade_to_black_cv(img, level):
     # Multiply image brightness by level
     # faded = (img.astype(np.float32) * level).astype(np.uint8)
-    faded = 100 * level
+    faded = 1.0 * level
     
     # Show instantly without blocking
     cv2.imshow("Fade Preview", faded)
