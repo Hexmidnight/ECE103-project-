@@ -58,7 +58,7 @@ def take_picture():
     cap = cv2.VideoCapture(0, cv2.CAP_V4L2)
  
     cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)   # reliable resolution
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
     # Capture Time
@@ -75,7 +75,7 @@ def take_picture():
     cv2.imwrite(images_path, frame)
     print("Picture saved:", images_path)
 
-    return frame   # Return image in memory for faster fades
+    return frame
 
 
 """
@@ -89,7 +89,7 @@ cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSC
 def fade_to_black_cv(img, level):
     # Multiply image brightness by level
     # faded = (img.astype(np.float32) * level).astype(np.uint8)
-    faded = img * level
+    faded = 100 * level
     
     # Show instantly without blocking
     cv2.imshow("Fade Preview", faded)
