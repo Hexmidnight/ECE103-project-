@@ -101,7 +101,7 @@ def increment_fade(img):
     fade_steps = [1.0, 0.7, 0.4, 0.2, 0.0]
     # fade_steps = [0.7, 0.4, 0.2, 0.0]
 
-    cv2.namedWindow("Fade Preview", img)
+    cv2.namedWindow("Fade Preview", cv2.WINDOW_NORMAL)
     cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
 
