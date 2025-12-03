@@ -58,6 +58,9 @@ def take_picture():
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
 
+    print("Warmup")
+    time.sleep(2)
+
     # Skip first 5 frames
     for _ in range(5):
         cap.read()
@@ -99,18 +102,18 @@ def fade_to_black_cv(img, level):
 
 def increment_fade(img):
     fade_steps = [1.0, 0.7, 0.4, 0.2, 0.0]
-    # fade_steps = [0.7, 0.4, 0.2, 0.0]
 
     cv2.namedWindow("Fade Preview", cv2.WINDOW_NORMAL)
     cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
+    print("First Display Test")
+    fade_to_black_cv(img, 1.0)
+    time.sleep(0.5)
 
     for level in fade_steps:
         wait_for_beam_break_nonblocking()
         print("Applying fade level:", level)
         fade_to_black_cv(img, level)
-
-    # time.sleep(10) attempt to hold last image
 
 
 """
