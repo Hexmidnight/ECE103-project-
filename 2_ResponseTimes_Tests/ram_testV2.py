@@ -55,8 +55,8 @@ def take_picture():
 
     # Not inverted for now
     cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1080)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1920)
 
     print("Warmup")
     time.sleep(2)
@@ -101,7 +101,7 @@ def fade_to_black_cv(img, level):
 
 
 def increment_fade(img):
-    fade_steps = [1.0, 0.7, 0.4, 0.2, 0.0]
+    fade_steps = [0.7, 0.4, 0.2, 0.0]
 
     cv2.namedWindow("Fade Preview", cv2.WINDOW_NORMAL)
     cv2.setWindowProperty("Fade Preview", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
